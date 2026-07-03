@@ -20,6 +20,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/alumnos.css">
     </head>
     <body>
+        <div class="cerrar_sesion">
+            <a href="${pageContext.request.contextPath}/SLogout">Cerrar sesión</a>
+        </div>
         <div class="contenedor">
             <div class="columna_tabla">
                 <%

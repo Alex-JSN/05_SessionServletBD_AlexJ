@@ -11,6 +11,30 @@ body
     padding:          10px;
     min-height:       100vh;
 }
+.cerrar_sesion
+{
+    max-width:     100%;
+    margin:        0 auto 10px auto;
+    display:       flex;
+    justify-content: flex-end;
+}
+.cerrar_sesion a
+{
+    display:         inline-block;
+    background:      #f44336;
+    color:           white;
+    text-decoration: none;
+    padding:         7px 14px;
+    border-radius:   3px;
+    font-size:       13px;
+    font-weight:     bold;
+    box-shadow:      0 1px 5px rgba(0, 0, 0, 0.1);
+    transition:      background 0.2s ease;
+}
+.cerrar_sesion a:hover
+{
+    background: #d32f2f;
+}
 .contenedor
 {
     max-width:     100%;
