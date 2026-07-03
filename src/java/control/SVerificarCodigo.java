@@ -16,29 +16,26 @@ import util.EmailUtil;
     private final DAOUsuario daoUsuario = new DAOUsuario();
  
     /** Muestra el formulario para ingresar el código. */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.getRequestDispatcher("verificarCodigo.jsp").forward(request, response);
     }
  
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         processRequest(request, response);
     }
  
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
  
         request.setCharacterEncoding("UTF-8");
  
         String correo = request.getParameter("correo");
         String codigo = request.getParameter("codigo");
-        String accion = request.getParameter("accion"); // "verificar" o "reenviar"
+        String accion = request.getParameter("accion");
  
         if ("reenviar".equals(accion))
         {
@@ -73,8 +70,7 @@ import util.EmailUtil;
         request.getRequestDispatcher("verificarCodigo.jsp").forward(request, response);
     }
  
-    private void reenviarCodigo(HttpServletRequest request, HttpServletResponse response, String correo)
-            throws ServletException, IOException
+    private void reenviarCodigo(HttpServletRequest request, HttpServletResponse response, String correo) throws ServletException, IOException
     {
  
         if (correo == null || correo.isBlank())
@@ -96,7 +92,6 @@ import util.EmailUtil;
  
         try
         {
-            // No tenemos el nombre a la mano aquí; usamos el correo como saludo genérico.
             EmailUtil.enviarCorreoVerificacion(correo, "estudiante", nuevoCodigo);
         }
         catch (RuntimeException e)

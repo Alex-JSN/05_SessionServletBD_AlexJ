@@ -21,22 +21,19 @@ import jakarta.servlet.http.HttpServletResponse;
     /**
      * Muestra el formulario de registro.
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.getRequestDispatcher("loginRegistrar.jsp").forward(request, response);
     }
  
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         processRequest(request, response);
     }
  
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
  
         request.setCharacterEncoding("UTF-8");
@@ -47,7 +44,6 @@ import jakarta.servlet.http.HttpServletResponse;
         String apellidoM = request.getParameter("apellidoM");
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
-        // Puedes fijar "alumno" por default si el registro público es solo para alumnos
         String tipoUsuario = "alumno";
  
         if (matricula == null || matricula.isBlank()
@@ -83,7 +79,6 @@ import jakarta.servlet.http.HttpServletResponse;
         }
         catch (RuntimeException e)
         {
-            // El usuario ya quedó registrado en la BD aunque el correo falle
             request.setAttribute("error", "Te registramos, pero no pudimos enviar el correo de verificación. Contacta al administrador.");
             request.getRequestDispatcher("loginRegistrar.jsp").forward(request, response);
             return;
@@ -99,7 +94,4 @@ import jakarta.servlet.http.HttpServletResponse;
     {
         return "Servlet de registro de usuarios";
     }
-
-
-
 }

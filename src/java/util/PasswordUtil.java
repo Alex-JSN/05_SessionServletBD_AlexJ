@@ -9,7 +9,6 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class PasswordUtil
 {
-
     private static final int ITERACIONES = 65536;
     private static final int LONGITUD_LLAVE = 128;
 

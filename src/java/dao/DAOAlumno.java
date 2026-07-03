@@ -9,26 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * DAO adaptado a la nueva base de datos (Usuarios + Calificaciones).
- *
- * DISEÑO ACTUAL (transición):
- * - Los alumnos que aparecen aquí YA deben existir en la tabla Usuarios
- *   (se registran mediante el flujo de login/registro con correo y contraseña).
- *   Este panel NO crea cuentas nuevas, solo administra sus calificaciones.
- * - Cada calificación pertenece a una materia (Calificaciones.id_materia), pero
- *   como todavía no hay un selector de materia en el formulario, se usa una
- *   materia por default (ID_MATERIA_DEFAULT).
- *
- * PARA ACTIVAR MULTI-MATERIA A FUTURO:
- * 1. Agrega un <select> de materia en alumnos.jsp (poblado desde la tabla Materias).
- * 2. Descomenta las líneas marcadas con "MATERIA:" en este archivo.
- * 3. Reemplaza el uso de ID_MATERIA_DEFAULT por el id_materia que venga del formulario.
- */
 public class DAOAlumno
 {
-    // TODO MATERIA: mientras no haya selector de materia en el formulario, se usa esta por default.
-    // Ajusta el valor al id_materia real que quieras usar para pruebas (revisa: SELECT * FROM Materias;)
     private static final int ID_MATERIA_DEFAULT = 1;
 
     public ArrayList<Alumno> listar()
@@ -173,7 +155,6 @@ public class DAOAlumno
             return false;
         }
 
-        // Si ya existe una calificación para este alumno y esta materia, actualízala en vez de duplicar.
         if (existeCalificacion(idUsuario, ID_MATERIA_DEFAULT))
         {
             return actualizarCalificacion(idUsuario, ID_MATERIA_DEFAULT, alumno);
@@ -186,7 +167,7 @@ public class DAOAlumno
              PreparedStatement ps = con.prepareStatement(sql))
         {
             ps.setInt(1, idUsuario);
-            ps.setInt(2, ID_MATERIA_DEFAULT); // MATERIA: reemplaza por el id_materia real cuando exista selector
+            ps.setInt(2, ID_MATERIA_DEFAULT);
             ps.setBigDecimal(3, new BigDecimal(alumno.getP1()));
             ps.setBigDecimal(4, new BigDecimal(alumno.getP2()));
             ps.setBigDecimal(5, new BigDecimal(alumno.getP3()));
@@ -287,8 +268,6 @@ public class DAOAlumno
             return false;
         }
     }
-
-    // ---------- Helpers internos ----------
 
     private Alumno mapear(ResultSet rs) throws SQLException
     {

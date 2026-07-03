@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 
 public class DAOUsuario
 {
-
     public boolean existeCorreo(String correo)
     {
         String sql = "SELECT id_usuario FROM Usuarios WHERE correo = ?";

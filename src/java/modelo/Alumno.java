@@ -6,7 +6,6 @@ public class Alumno
     private String nombre;
     private String paterno;
     private String materno;
-
     private String p1, p2, p3;
     
     public Alumno() {}
